@@ -1,0 +1,55 @@
+.problem-solving-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, transparent 0%, rgba(0, 102, 255, 0.05) 50%, transparent 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.ps-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.ps-intro {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.ps-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.ps-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease;
+  color: #fff;
+  text-decoration: none;
+}
+
+.ps-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ps-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ps-card ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.ps-card li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+}
