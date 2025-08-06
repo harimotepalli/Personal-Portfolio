@@ -121,7 +121,7 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 1 }}
         >
           <div className="image-container">
-            <img src="src\assets\24M11MC105.png" alt="Durga Hari Motepalli" />
+            <img src="/24M11MC105.png" alt="Durga Hari Motepalli" />
             {/* Optional: Replace with your actual image path */}
             <div className="image-glow"></div>
           </div>
