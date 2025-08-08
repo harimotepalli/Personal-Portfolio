@@ -1,64 +1,76 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaFilter } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import './Projects.css';
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-
   const projects = [
     {
       id: 1,
       title: 'Groomax – Pet Grooming Booking Website',
       description:
         'Fully functional pet grooming platform with localStorage-powered admin dashboard, slot management, and user-friendly booking. HTML, CSS, JavaScript.',
-      image: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=500', // Replace with your own image if available
+      image: '/GrooMax.png', // Replace with your own image if available
       category: 'Web',
       technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-      github: 'https://github.com/harimotepalli/groomax',
-      demo: 'https://groomax-demo.vercel.app', // Replace with your actual demo if available
+      github: 'https://github.com/harimotepalli/Pet-GrooMing',
+      demo: 'https://pet-groo-ming-five.vercel.app/', // Replace with your actual demo if available
     },
     {
       id: 2,
       title: 'eTrack – College Property Management System',
       description:
         'Comprehensive MERN stack asset management: floor/room/device structure, real-time issue reporting, dashboard access for admins and students, and notification system.',
-      image: 'https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=500', // Replace with your own image if available
+      image: '/eTrack - Dashboard.png', // Replace with your own image if available
       category: 'Web',
       technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'Nodemailer'],
-      github: 'https://github.com/harimotepalli/etrack-college',
-      demo: 'https://etrack-demo.vercel.app', // Replace with your actual demo if available
+      github: 'https://github.com/harimotepalli/eTrack-Project',
+      demo: 'https://e-track-project.vercel.app', // Replace with your actual demo if available
+    },
+   {
+  id: 3,
+  title: 'eTrack – Student UI',
+  description:
+    'Frontend interface for students in the eTrack asset management system. Allows students to report defective devices by room/floor, view property status, track complaint history, and receive live updates using WebSockets.',
+  image: '/eTrack- Student UI.png',
+  category: 'Web',
+  technologies: ['React.js', 'Vite', 'Tailwind CSS', 'Socket.IO', 'Axios', 'React Router'],
+  github: 'https://github.com/harimotepalli/e-Track_Student-UI',
+  demo: 'https://e-track-student-ui.vercel.app/',
+},
+    {
+      id: 4,
+      title: 'StegoVault',
+      description:
+        'A secure file vault leveraging steganography techniques for embedded, private file storage/sharing. Designed with custom algorithms for enhanced privacy.',
+      image: '/StegoVault.png', // Replace with your own image if available
+      category: 'Web',
+      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Steganography'],
+      github: 'https://github.com/harimotepalli/StegoVault',
+      demo: 'https://stego-vault-eight.vercel.app', // Replace with your actual demo if available
     },
     {
-      id: 3,
+      id: 5,
+      title: 'Security Staff Attendance System',
+      description:
+        'Dynamic college staff attendance system: profile CRUD, leave/OD tracking, CSV import/export, and secure image handling via API.',
+      image: '/security project.png',
+      category: 'College Project', // Updated category for clarity
+      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'CSV', 'REST API'],
+      // No github or demo links for this project
+    },
+     {
+      id: 6,
       title: 'StegoVault',
       description:
         'A secure file vault leveraging steganography techniques for embedded, private file storage/sharing. Designed with custom algorithms for enhanced privacy.',
       image: 'https://images.pexels.com/photos/205316/pexels-photo-205316.jpeg?auto=compress&cs=tinysrgb&w=500', // Replace with your own image if available
       category: 'Web',
       technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Steganography'],
-      github: 'https://github.com/harimotepalli/stegovault',
-      demo: 'https://stegovault-demo.vercel.app', // Replace with your actual demo if available
-    },
-    {
-      id: 4,
-      title: 'Security Staff Attendance System',
-      description:
-        'Dynamic college staff attendance system: profile CRUD, leave/OD tracking, CSV import/export, and secure image handling via API.',
-      image: 'https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&cs=tinysrgb&w=500', // Replace with your own image if available
-      category: 'Web',
-      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'CSV', 'REST API'],
-      github: 'https://github.com/harimotepalli/security-attendance-system',
-      demo: 'https://security-attendance-demo.vercel.app', // Replace with your actual demo if available
+      github: 'https://github.com/harimotepalli/StegoVault',
+      demo: 'https://stego-vault-eight.vercel.app', // Replace with your actual demo if available
     },
   ];
-
-  const filters = ['All', 'Web'];
-
-  const filteredProjects =
-    activeFilter === 'All'
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
 
   return (
     <section id="projects" className="section projects-section">
@@ -73,27 +85,8 @@ const Projects = () => {
           Featured Projects
         </motion.h2>
 
-        <motion.div
-          className="filter-buttons"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <FaFilter className="filter-icon" />
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
-              onClick={() => setActiveFilter(filter)}
-            >
-              {filter}
-            </button>
-          ))}
-        </motion.div>
-
         <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               className="project-card glass-card"
@@ -147,25 +140,6 @@ const Projects = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          className="projects-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h3>Want to see more?</h3>
-          <p>Check out my GitHub for additional projects and contributions</p>
-          <a
-            href="https://github.com/harimotepalli"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            <FaGithub /> View GitHub Profile
-          </a>
-        </motion.div>
       </div>
     </section>
   );

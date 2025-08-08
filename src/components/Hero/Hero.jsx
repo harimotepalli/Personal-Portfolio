@@ -84,34 +84,6 @@ const Hero = () => {
             {/* Replace link above with your real Google Drive/Resume URL */}
           </motion.div>
 
-          <motion.div
-            className="hero-social"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-          >
-            <a
-              href="https://github.com/harimotepalli"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/durga-hari-motepalli-9340a821a/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://x.com/charan_fanboyy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTwitter />
-            </a>
-          </motion.div>
         </motion.div>
 
         <motion.div

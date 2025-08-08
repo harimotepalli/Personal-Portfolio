@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
-import { FaPaperPlane ,FaLinkedin, FaGithub} from 'react-icons/fa';
+import { FaPaperPlane } from 'react-icons/fa';
 import './Contact.css';
 
 const Contact = () => {
@@ -8,10 +9,18 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+
+  useEffect(() => {
+    if (submitStatus) {
+      const timer = setTimeout(() => setSubmitStatus(''), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,24 +29,18 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
-    setSubmitStatus('');
-
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      subject: formData.subject,
-    };
-
     emailjs.send(
-      'service_hbsv5mr',
-      'template_sbcldlh',
-      templateParams,
-      'qASjCMqGrXcC_xSY'
-    )
+        'service_hbsv5mr',
+        'template_sbcldlh',
+        formData,
+        'qASjCMqGrXcC_xSYR'
+      )
       .then(() => {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '' });
+        setFormData({ name: '', email: '', subject: '', message: '' });
       })
       .catch((error) => {
         console.error("EmailJS error:", error.text || error);
@@ -50,112 +53,73 @@ const Contact = () => {
 
   return (
     <section className="contact-section" id="contact">
-      <div className="contact-content">
-        {/* Left Info Panel */}
-        <div className="contact-info glass-card">
-          <h3>Let’s Connect</h3>
-          <p>I'd love to hear from you! Whether you have a question or just want to say hi, feel free to drop a message.</p>
+      <div className="container">
+        {/* Centered Section Title */}
+        <motion.h2
+          className="section-title gradient-text"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Get In Touch
+        </motion.h2>
 
-          <div className="contact-details">
-            <div className="contact-item">
-              <div className="contact-icon">📧</div>
-              <div className="contact-text">
-                <h4>Email</h4>
-                <a href="mailto:durgahari012@gmail.com">durgahari012@gmail.com</a>
-              </div>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon">📞</div>
-              <div className="contact-text">
-                <h4>Phone</h4>
-                <a href="tel:+917093679038">+91 7093679038</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="social-links">
-            <h4>Follow Me</h4>
-            <div className="social-icons">
-              <a
-                href="https://www.linkedin.com/in/durga-hari-motepalli-9340a821a/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-              >
-                <i className="fab fa-linkedin-in"><FaLinkedin>\</FaLinkedin></i>
-              </a>
-              <a
-                href="https://github.com/harimotepalli"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-              >
-                <i className="fab fa-linkedin-in"><FaGithub>\</FaGithub></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Form */}
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label>Your Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="John Doe"
-                required
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label>Your Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label>Subject</label>
-            <input
-              type="text"
-              name="subject"
-              placeholder="What's this about?"
-              required
-              value={formData.subject}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className={`submit-btn ${isSubmitting ? 'submitting' : ''} ${submitStatus === 'success' ? 'success' : ''}`}
-            disabled={isSubmitting}
+        <div className="contact-layout">
+          {/* Left Column: Text */}
+          <motion.div
+            className="contact-text"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
           >
-            {isSubmitting ? (
-              <div className="loading-spinner"></div>
-            ) : (
-              <>
-                Send <FaPaperPlane />
-              </>
-            )}
-          </button>
+            <p>
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+            </p>
+          </motion.div>
 
-          {submitStatus === 'success' && (
-            <div className="success-message">✅ Message sent successfully!</div>
-          )}
-          {submitStatus === 'error' && (
-            <div className="success-message" style={{ color: 'red' }}>❌ Failed to send. Try again.</div>
-          )}
-        </form>
+          {/* Right Column: Form */}
+          <motion.div
+            className="contact-form-wrapper glass-card"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input id="name" type="text" name="name" required value={formData.name} onChange={handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" name="email" required value={formData.email} onChange={handleChange} />
+              </div>
+              <div className="form-group full-width">
+                <label htmlFor="subject">Subject</label>
+                <input id="subject" type="text" name="subject" required value={formData.subject} onChange={handleChange} />
+              </div>
+              <div className="form-group full-width">
+                <label htmlFor="message">Message</label>
+                <textarea id="message" name="message" rows="5" required value={formData.message} onChange={handleChange}></textarea>
+              </div>
+              
+              {/* Centered Button Wrapper */}
+              <div className="form-button-wrapper">
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? <div className="loading-spinner"></div> : <>Send Message <FaPaperPlane /></>}
+                </button>
+              </div>
+
+              {submitStatus && (
+                <div className={`form-status-message ${submitStatus} full-width`}>
+                  {submitStatus === 'success' ? '✅ Message sent successfully!' : '❌ Failed to send. Please try again.'}
+                </div>
+              )}
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

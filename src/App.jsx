@@ -8,7 +8,7 @@ import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import './styles/globals.css';
-import ProblemSolving from './components/problemsolving/ProblemSolving';
+// import ProblemSolving from './components/problemsolving/ProblemSolving';
 function App() {
   return (
     <Router>
@@ -18,7 +18,7 @@ function App() {
           <Hero />
           <About />
           <Skills />
-          <ProblemSolving />
+          {/* <ProblemSolving /> */}
           <Projects />
           <Contact />
         </main>
