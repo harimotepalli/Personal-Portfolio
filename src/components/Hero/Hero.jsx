@@ -13,7 +13,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero-section">
-      <div className="hero-background">
+      {/* <div className="hero-background">
         <div className="floating-particles">
           {[...Array(20)].map((_, i) => (
             <div
@@ -27,7 +27,7 @@ const Hero = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="container hero-content">
         <motion.div
